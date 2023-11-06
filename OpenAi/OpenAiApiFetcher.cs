@@ -1,4 +1,13 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
 
 namespace OpenAi
 {
@@ -12,12 +21,21 @@ namespace OpenAi
         public OpenAiApiFetcher(string apiKey, string instruction,  string input)
         {
 
-            _system = new MessageModel(MessageModel.Role.System, instruction);
-            _user = new MessageModel(MessageModel.Role.User, input);
+            _system = new MessageModel
+            {
+                role = "system", // API expects a string "system"
+                content = instruction
+            };
+            _user = new MessageModel
+            {
+                role = "user", // API expects a string "user"
+                content = input
+            };
 
             _httpClient = new HttpClient();
 
 
+            // Set up HttpClient headers
             _httpClient.BaseAddress = new Uri("https://api.openai.com/");
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
         }
@@ -27,6 +45,7 @@ namespace OpenAi
             var requestData = new
             {
                 model = "gpt-3.5-turbo",
+        
                 messages = new[] { _system, _user },
                 temperature = 0.0,
                 max_tokens = 256
