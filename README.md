@@ -1,6 +1,6 @@
 # OpenAi Fetcher
 
-Class library to make incorporate OpenAI in your .NET application.
+Class library to incorporate OpenAI in your .NET application.
 
 ## Use
 
