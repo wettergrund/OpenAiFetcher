@@ -6,9 +6,9 @@ Class library to make incorporate OpenAI in your .NET application.
 
 ```CS
 
-  var newFetcher = new OpenAi.OpenAiApiFetcher(apiKey, "Return the capital city of the country", "Australia");
+  var Fetcher = new OpenAi.OpenAiApiFetcher(apiKey, "Return the capital city of the country", "Australia");
   
-  string result = await newFetcher.FetchCompletionsAsync();
+  string result = await Fetcher.FetchCompletionsAsync();
 
 ```
 
