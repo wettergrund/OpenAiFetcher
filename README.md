@@ -24,7 +24,7 @@ You can get reuslt returned as a JSON string or strongly-typed as **GptResponse*
 
 var fetcher = new OpenAi.OpenAiApiFetcher(apiKey, "Return the capital city of the country", "Australia");
 
-string result = await Fetcher.FetchCompletionsAsync();
+string result = await fetcher.FetchCompletionsAsync();
 
 ```
 
@@ -41,7 +41,7 @@ string result = await Fetcher.FetchCompletionsAsync();
 ### JSON string
 ```CS
 
-string result = await Fetcher.FetchCompletionsAsync();
+string result = await fetcher.FetchCompletionsAsync();
 ```
 
 #### Result

@@ -4,6 +4,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<PackageId>OpenAi_Fetcher</PackageId>
+	<Authors>Wettergrund</Authors>
+	<Version>0.1.0</Version>
+	<PackageDescription>A small library to make questions to OpenAI and return response.</PackageDescription>
+	<RepositoryUrl>https://github.com/wettergrund/OpenAiFetcher</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
