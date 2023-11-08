@@ -22,8 +22,6 @@ You can get reuslt returned as a JSON string or strongly-typed as **GptResponse*
 ### Strongly-typed
 ```CS
 
-var fetcher = new OpenAi.OpenAiApiFetcher(apiKey, "Return the capital city of the country", "Australia");
-
 GptResponse response = await fetcher.FetchCompletionsAsync(); 
 var gptChoises = response.Choices[0];
 
