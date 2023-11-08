@@ -6,6 +6,9 @@ Class library to incorporate OpenAI in your .NET application.
 
 
 ### Fetch data
+
+Replace ’apiKey’ with your OpenAI api key. And change instruction and input. 
+
 ```CS
   
 var fetcher = new OpenAi.OpenAiApiFetcher(apiKey, "Return the 3 biggest cities of the country", "Sweden");
