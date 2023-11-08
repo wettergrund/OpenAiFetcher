@@ -8,8 +8,27 @@ namespace OpenAi
 {
     internal class MessageModel
     {
-        public string role { get; set; }
-        public string content { get; set; }
+
+        public enum Role {
+            system,
+            user
+            }
+
+        private Role UserRole { get; set; }
+        public string Message { get; set; }
+
+        public string role => UserRole.ToString().ToLowerInvariant();
+
+        public MessageModel(Role userRole, string message)
+        {
+            UserRole = userRole;
+            Message = message;
+        }
+
+        public object ToRequestMessage()
+        {
+            return new { role = this.role, content = this.Message };
+        }
 
     }
 }

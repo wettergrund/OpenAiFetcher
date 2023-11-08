@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using OpenAi.Models;
 using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-
+using System.Text.Json;
 
 namespace OpenAi
 {
@@ -21,37 +14,36 @@ namespace OpenAi
         public OpenAiApiFetcher(string apiKey, string instruction,  string input)
         {
 
-            _system = new MessageModel
+            _system = new MessageModel(MessageModel.Role.system, instruction);
+            _user = new MessageModel(MessageModel.Role.user, input);
+
+            _httpClient = new HttpClient
             {
-                role = "system", // API expects a string "system"
-                content = instruction
+                BaseAddress = new Uri("https://api.openai.com/"),
+                
             };
-            _user = new MessageModel
-            {
-                role = "user", // API expects a string "user"
-                content = input
-            };
-
-            _httpClient = new HttpClient();
-
-
-            // Set up HttpClient headers
-            _httpClient.BaseAddress = new Uri("https://api.openai.com/");
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
         }
 
-        public async Task<string> FetchCompletionsAsync()
+        // Fetches and deserializes the response into a ChatCompletionResponse object
+        public async Task<GptResponse> FetchCompletionsAsync()
+        {
+            string jsonResponse = await FetchCompletionsJsonAsync();
+            return JsonSerializer.Deserialize<GptResponse>(jsonResponse, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+        }
+
+        // Fetches the raw JSON response string
+        public async Task<string> FetchCompletionsJsonAsync()
         {
             var requestData = new
             {
                 model = "gpt-3.5-turbo",
-        
-                messages = new[] { _system, _user },
-                temperature = 0.0,
+                messages = new[] { _system.ToRequestMessage(), _user.ToRequestMessage() },
+                temperature = 0,
                 max_tokens = 256
             };
 
-            string json = System.Text.Json.JsonSerializer.Serialize(requestData);
+            string json = JsonSerializer.Serialize(requestData);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await _httpClient.PostAsync("v1/chat/completions", content);
@@ -63,8 +55,7 @@ namespace OpenAi
             else
             {
                 // Handle the error
-                Console.WriteLine($"Error: {response.StatusCode}");
-                return null;
+                throw new HttpRequestException($"Error: {response.StatusCode}", null, response.StatusCode);
             }
         }
     }
