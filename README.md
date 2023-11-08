@@ -21,16 +21,13 @@ You can get reuslt returned as a JSON string or strongly-typed as **GptResponse*
 
 ### Strongly-typed
 ```CS
-
-var fetcher = new OpenAi.OpenAiApiFetcher(apiKey, "Return the capital city of the country", "Australia");
-
 string result = await Fetcher.FetchCompletionsAsync();
 
 ```
 
 #### Result
 
-```JSON
+```Text
 1. Stockholm - The capital and largest city of Sweden, with a population of approximately 975,000 people.
 2. Gothenburg - The second-largest city in Sweden, with a population of around 590,000 people.
 3. Malmö - The third-largest city in Sweden, with a population of about 320,000 people.
