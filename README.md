@@ -30,7 +30,7 @@ string result = await fetcher.FetchCompletionsAsync();
 
 #### Result
 
-```JSON
+```Text
 1. Stockholm - The capital and largest city of Sweden, with a population of approximately 975,000 people.
 2. Gothenburg - The second-largest city in Sweden, with a population of around 590,000 people.
 3. Malmö - The third-largest city in Sweden, with a population of about 320,000 people.
