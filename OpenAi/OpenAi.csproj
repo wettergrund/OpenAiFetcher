@@ -6,9 +6,20 @@
     <Nullable>enable</Nullable>
 	<PackageId>OpenAi_Fetcher</PackageId>
 	<Authors>Wettergrund</Authors>
-	<Version>0.1.0</Version>
+	<Version>0.1.1</Version>
 	<PackageDescription>A small library to make questions to OpenAI and return response.</PackageDescription>
 	<RepositoryUrl>https://github.com/wettergrund/OpenAiFetcher</RepositoryUrl>
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

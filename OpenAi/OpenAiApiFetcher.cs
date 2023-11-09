@@ -4,13 +4,21 @@ using System.Text.Json;
 
 namespace OpenAi
 {
-    public class OpenAiApiFetcher
+    public class OpenAiApiFetcher : IDisposable
     {
         private readonly HttpClient _httpClient;
         private readonly MessageModel _system;
         private readonly MessageModel _user;
+        private string _model = GptModels.Gpt35T;
+        public string Model { get => _model; 
+                                set => _model = value; 
+        }
 
-
+        /// <summary>
+        /// Does something interesting when called.
+        /// </summary>
+        /// <param name="parameter">A description of the parameter this function takes.</param>
+        /// <returns>A description of what this function returns.</returns>
         public OpenAiApiFetcher(string apiKey, string instruction,  string input)
         {
 
@@ -37,7 +45,7 @@ namespace OpenAi
         {
             var requestData = new
             {
-                model = "gpt-3.5-turbo",
+                model = this.Model,
                 messages = new[] { _system.ToRequestMessage(), _user.ToRequestMessage() },
                 temperature = 0,
                 max_tokens = 256
@@ -57,6 +65,11 @@ namespace OpenAi
                 // Handle the error
                 throw new HttpRequestException($"Error: {response.StatusCode}", null, response.StatusCode);
             }
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }
