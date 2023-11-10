@@ -24,6 +24,12 @@ namespace OpenAi.Models
         /// </summary>
         public static string Gpt4T { get; } = "gpt-4-1106-preview";
 
+        /// <summary>
+        /// Set a cusytom gpt model 
+        /// </summary>
+        public static string Custom { get; set; }
+
+
 
     }
 }

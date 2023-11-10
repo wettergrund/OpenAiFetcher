@@ -15,10 +15,23 @@ var fetcher = new OpenAi.OpenAiApiFetcher(apiKey, "Return the 3 biggest cities o
 
 ```
 
+#### Change default model
+
+Default setting is Gpt-3.5-turbo. But you can select gpt-4 or gpt-4-1106-preview.
+
+```CS
+fetcher.Model = GptModels.Gpt4
+```
+
+**Custom model**
+
+```CS
+fetcher.Model = GptModels.Custom = "custom-model";
+```
 
 ---
 
-You can get reuslt returned as a JSON string or strongly-typed as **GptResponse**
+You can get result returned as a JSON string or strongly-typed as **GptResponse**
 
 
 
