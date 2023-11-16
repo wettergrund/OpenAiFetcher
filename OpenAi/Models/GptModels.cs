@@ -14,13 +14,13 @@ namespace OpenAi.Models
         /// <summary>
         /// gpt-3.5-turbo
         /// </summary>
-        public static string Gpt35T { get; } = "gpt-3.5-turbo";
+        public static string Gpt35T { get; } = "gpt-3.5-turbo-1106";
         /// <summary>
         /// gpt-4
         /// </summary>
         public static string Gpt4 { get; } = "gpt-4";
         /// <summary>
-        /// gpt-4-1106-preview
+        /// gpt-4-1106-preview, support json mode
         /// </summary>
         public static string Gpt4T { get; } = "gpt-4-1106-preview";
 

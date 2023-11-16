@@ -10,8 +10,43 @@ namespace OpenAi
         private readonly MessageModel _system;
         private readonly MessageModel _user;
         private string _model = GptModels.Gpt35T;
-        public string Model { get => _model; 
-                                set => _model = value; 
+        private bool _jsonMode = false;
+        private int _tokenSize = 500;
+
+        private double _temp = 0;
+        public string Model
+        {
+            get => _model;
+            set => _model = value;
+        }
+        public int TokenSize
+        {
+            get => _tokenSize;
+            set => _tokenSize = value;
+        }
+
+        public bool JsonMode
+        {
+            get => _jsonMode;
+            set => _jsonMode = value;
+        }
+
+
+        public double Temp
+        {
+            get => _temp;
+            set
+            {
+                if (value >= 0 && value <= 1)
+                {
+                    _temp = value;
+                }
+                else
+                {
+                    _temp = 0;
+                }
+             
+            }
         }
 
         /// <summary>
@@ -41,15 +76,28 @@ namespace OpenAi
         }
 
         // Fetches the raw JSON response string
-        public async Task<string> FetchCompletionsJsonAsync()
+        public async Task<string> FetchCompletionsJsonAsync(bool jsonMode = false)
         {
-            var requestData = new
+
+
+
+
+
+            var requestData = new Dictionary<string, object>
             {
-                model = this.Model,
-                messages = new[] { _system.ToRequestMessage(), _user.ToRequestMessage() },
-                temperature = 0,
-                max_tokens = 256
+                { "model", this.Model },
+                { "messages", new[] { _system.ToRequestMessage(), _user.ToRequestMessage() } },
+                { "temperature", this.Temp },
+                { "max_tokens", this.TokenSize }
             };
+
+            if (jsonMode)
+            {
+                // Add response_format property when jsonMode is true
+                requestData.Add("response_format", new { type = "json_object" });
+            }
+
+
 
             string json = JsonSerializer.Serialize(requestData);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
