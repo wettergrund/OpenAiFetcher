@@ -24,7 +24,7 @@ jobs:
     - name: Extract version
       id: project_version
       run: |
-        $version = [xml](Get-Content ./OpenAi/OpenAi.csproj).Project.PropertyGroup.Version
+        $version = [xml](Get-Content ./OpenAiFetcher/OpenAi.csproj).Project.PropertyGroup.Version
         echo "PROJECT_VERSION=$version" >> $GITHUB_ENV
         echo "::set-output name=version::$version"
 
