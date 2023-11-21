@@ -34,4 +34,4 @@ jobs:
       run: dotnet pack --configuration Release
 
     - name: Push NuGet package
-      run: dotnet nuget push "./OpenAiFetcher/bin/Release/OpenAi_Fetcher.${{ steps.project_version.outputs.version }}.nupkg" --api-key ${{ secrets.YOUR_API_KEY_SECRET }} --source "github"
+      run: dotnet nuget push "./OpenAiFetcher/bin/Release/OpenAi_Fetcher.${{ steps.project_version.outputs.version }}.nupkg" --api-key ${{ secrets.YOUR_API_KEY_SECRET }} --source "https://nuget.pkg.github.com/wettergrund/index.json"
