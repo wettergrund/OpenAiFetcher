@@ -38,5 +38,5 @@ jobs:
       env:
         NUGET_PACKAGE: "./OpenAiFetcher/bin/Release/OpenAi_Fetcher.${{ steps.project_version.outputs.version }}.nupkg"
         NUGET_SOURCE: "https://nuget.pkg.github.com/wettergrund/index.json"
-        API_KEY: ${{ secrets.YOUR_API_KEY_SECRET }}
+        API_KEY: ${{ secrets.GIT_API }}
       run: dotnet nuget push "$NUGET_PACKAGE" --api-key "$API_KEY" --source "$NUGET_SOURCE"
