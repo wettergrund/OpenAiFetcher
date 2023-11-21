@@ -27,6 +27,9 @@ jobs:
         echo "PROJECT_VERSION=$version" >> $GITHUB_ENV
         echo "::set-output name=version::$version"
 
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+      
     - name: Pack
       run: dotnet pack --configuration Release
 
