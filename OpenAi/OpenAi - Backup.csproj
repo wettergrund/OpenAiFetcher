@@ -16,7 +16,7 @@
 	<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\OpenAi.xml</DocumentationFile>
 	<Description>Simple library for making OpenAI calls</Description>
 	<PackageReleaseNotes>Small adjustment to readme</PackageReleaseNotes>
-	<PackageIcon>openai.png</PackageIcon>
+	<PackageIcon>DALL·E 2023-11-20 13.05.20 - A modern, flat, and clear logo that combines the elements of NuGet and OpenAI. The design should feature the recognizable NuGet symbol, typically a pa.png</PackageIcon>
 	<PackageTags>openai;chatgpt</PackageTags>
   </PropertyGroup>
 

@@ -3,7 +3,9 @@
 Class library to incorporate OpenAI in your .NET application.
 
 ## Changelog
-### 0.1.3
+### 0.1.4 - Adjustment to readme
+
+### 0.1.3 - More options
 #### Added 
 - More options: [Other settings]
 - Changed default model to gpt-3.5-turbo-1106 
@@ -38,11 +40,11 @@ fetcher.Model = GptModels.Custom = "custom-model";
 
 ### Other settings
 
-You can also change Temprature, JsonMode* and token size
+You can also change Temprature, JsonMode* and token size.
 
 #### Temp
 
-Temp can be set between 0 and 1, where 0 will give 
+Temp can be set between 0 and 1, where 0 will give little/none variation in the response, and 1 give more variation. Between 0.6 - 0.9 is recommended for creative tasks.
 
 ```CS
 fetcher.Temp = 0.7 
@@ -50,7 +52,7 @@ fetcher.Temp = 0.7
 
 #### JsonMode
 
-Json mode is available with GPT-3.5-turbo-1106 (Gpt35T and Gpt4T)
+Json mode is available with GPT-3.5-turbo-1106 and gpt-4-1106-preview (Gpt35T and Gpt4T)
 
 ```CS
 fetcher.JsonMode = true
