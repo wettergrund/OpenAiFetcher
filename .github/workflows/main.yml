@@ -1,0 +1,43 @@
+name: .NET Package and Push
+
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0' # Replace with your .NET Core version
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Extract version
+      id: project_version
+      run: |
+        [xml]$csproj = Get-Content ./OpenAi/OpenAi.csproj
+        $version = $csproj.Project.PropertyGroup.Version
+        echo "PROJECT_VERSION=$version" | Out-File -FilePath $Env:GITHUB_ENV -Append
+        echo "::set-output name=version::$version"
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+      
+    - name: Pack
+      run: dotnet pack --configuration Release
+
+    - name: Push NuGet package
+      env:
+        NUGET_PACKAGE: "D:\\a\\OpenAiFetcher\\OpenAiFetcher\\OpenAi\\bin\\Release\\OpenAi_Fetcher.${{ steps.project_version.outputs.version }}.nupkg"
+        NUGET_SOURCE: "https://nuget.pkg.github.com/wettergrund/index.json"
+        API_KEY: ${{ secrets.GIT_API }}
+      run: dotnet nuget push "$NUGET_PACKAGE" --api-key "$API_KEY" --source "$NUGET_SOURCE"
