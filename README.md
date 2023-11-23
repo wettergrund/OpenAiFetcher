@@ -11,7 +11,7 @@ Class library to incorporate OpenAI in your .NET application.
 - Changed default model to gpt-3.5-turbo-1106 
 
 ---
-
+ 
 ## Use
 
 
